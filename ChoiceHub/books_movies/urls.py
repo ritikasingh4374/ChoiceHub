@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.urls import path
 from books_movies import views
+from .views import register
 # from .views import book_recommendation
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('register/', views.register, name='register'),
     path('book_list/', views.book_list, name='book_list'),
+    path('register/', register, name='register'),
 
     # path('quiz/', book_recommendation, name='book_recommendation'),
 ]

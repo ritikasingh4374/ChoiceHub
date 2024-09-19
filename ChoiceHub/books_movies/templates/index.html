@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
 </head>
 <body>
+    
     <div class="container">
         <nav class="navbar">
             <h1 class="heading">ChoiceHub</h1>
@@ -129,6 +130,11 @@
     <!-- Footer Section -->
     <footer class="footer">
     </footer>
+    {% for message in messages %}
+        <script>
+            alert("{{ message }}");  // Show the message as an alert
+        </script>
+    {% endfor %}
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
