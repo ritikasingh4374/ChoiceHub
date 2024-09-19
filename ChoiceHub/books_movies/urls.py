@@ -21,5 +21,7 @@ from books_movies import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('register/', views.register, name='register'),
+    path('book_list/', views.book_list, name='book_list'),
+
     # path('quiz/', book_recommendation, name='book_recommendation'),
 ]
