@@ -75,3 +75,13 @@ class QuizForm(forms.Form):
     romance = forms.ChoiceField(choices=ROMANCE_CHOICES)
     narrative_style = forms.ChoiceField(choices=NARRATIVE_STYLE_CHOICES)
     world_building_importance = forms.ChoiceField(choices=WORLD_BUILDING_IMPORTANCE_CHOICES)
+
+# forms.py
+
+# forms.py
+from django import forms
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='Email', max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput, label='Password')
+
