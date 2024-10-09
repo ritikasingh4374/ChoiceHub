@@ -1,21 +1,159 @@
-<!-- quiz.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Quiz</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Quiz Website</title>
+    <!-- Use Django's static tag to link CSS -->
+    <link rel="stylesheet" href="{% static 'css/style-quiz.css' %}?v=2">
 </head>
 <body>
-    <div class="container">
-        <h1>Book Recommendation Quiz</h1>
-        <form method="post">
+    <div class="quiz-container">
+        <form id="quizForm" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Renders form fields as paragraphs -->
-            <button type="submit">Submit</button>
+            <input type="hidden" id="genre" name="genre">
+            <input type="hidden" id="writing_style" name="writing_style">
+            <input type="hidden" id="setting" name="setting">
+            <input type="hidden" id="mood" name="mood">
+            <input type="hidden" id="length" name="length">
+            <input type="hidden" id="pace" name="pace">
+            <input type="hidden" id="ending" name="ending">
+            <input type="hidden" id="emotional_tone" name="emotional_tone">
+            <input type="hidden" id="romance" name="romance">
+            <input type="hidden" id="world_building_importance" name="world_building_importance">
         </form>
+        
+        <!-- Question 1: Genre -->
+        <div class="card" id="question1">
+            <h2>What genre are you interested in?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'genre', 'Philosophy')">Philosophy</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Art & Architecture')">Art & Architecture</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Non-fiction')">Non-fiction</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Art')">Art</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Biography & Autobiography')">Biography & Autobiography</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Social Science')">Social Science</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Fiction')">Fiction</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Drama')">Drama</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Science')">Science</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Music')">Music</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'History')">History</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Art History')">Art History</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Education')">Education</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Poetry')">Poetry</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Art Instruction')">Art Instruction</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Photography')">Photography</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Environmental Studies')">Environmental Studies</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Self-help')">Self-help</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Cultural Studies')">Cultural Studies</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Children\'s Literature')">Children's Literature</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Reference')">Reference</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Travel')">Travel</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Neuroscience')">Neuroscience</div>
+                <div class="option" onclick="selectOption(this, 'genre', 'Art Therapy')">Art Therapy</div>
+            </div>
+        </div>
+
+        <!-- Repeat for other questions (2-10), similar structure as above -->
+        
+        <div class="card" id="question2">
+            <h2>What type of writing style do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Analytical')">Analytical</div>
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Descriptive')">Descriptive</div>
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Narrative')">Narrative</div>
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Conversational')">Conversational</div>
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Lyric')">Lyric</div>
+                <div class="option" onclick="selectOption(this, 'writing_style', 'Technical')">Technical</div>
+            </div>
+        </div>
+
+        <div class="card" id="question3">
+            <h2>What type of setting do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'setting', 'Contemporary')">Contemporary</div>
+                <div class="option" onclick="selectOption(this, 'setting', 'Historical')">Historical</div>
+                <div class="option" onclick="selectOption(this, 'setting', 'Fairytale')">Fairytale</div>
+            </div>
+        </div>
+
+        <div class="card" id="question4">
+            <h2>What kind of mood are you looking for?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'mood', 'Reflective')">Reflective</div>
+                <div class="option" onclick="selectOption(this, 'mood', 'Engaging')">Engaging</div>
+                <div class="option" onclick="selectOption(this, 'mood', 'Serious')">Serious</div>
+                <div class="option" onclick="selectOption(this, 'mood', 'Light-hearted')">Light-hearted</div>
+                <div class="option" onclick="selectOption(this, 'mood', 'Thought-provoking')">Thought-provoking</div>
+                <div class="option" onclick="selectOption(this, 'mood', 'Inspirational')">Inspirational</div>
+            </div>
+        </div>
+
+        <div class="card" id="question5">
+            <h2>What book length do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'length', 'Short')">Short (Under 100 pages)</div>
+                <div class="option" onclick="selectOption(this, 'length', 'Medium')">Medium (100-300 pages)</div>
+                <div class="option" onclick="selectOption(this, 'length', 'Long')">Long (300-500 pages)</div>
+                <div class="option" onclick="selectOption(this, 'length', 'Epic')">Epic (Over 500 pages)</div>
+            </div>
+        </div>
+
+        <div class="card" id="question6">
+            <h2>Do you prefer fast-paced or slow-paced books?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'pace', 'Steady')">Steady</div>
+                <div class="option" onclick="selectOption(this, 'pace', 'Fast-paced')">Fast-paced</div>
+                <div class="option" onclick="selectOption(this, 'pace', 'Moderate')">Moderate</div>
+            </div>
+        </div>
+
+        <div class="card" id="question7">
+            <h2>What kind of ending do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'ending', 'Open-ended')">Open-ended</div>
+                <div class="option" onclick="selectOption(this, 'ending', 'Conclusive')">Conclusive</div>
+                <div class="option" onclick="selectOption(this, 'ending', 'Ambiguous')">Ambiguous</div>
+            </div>
+        </div>
+
+        <div class="card" id="question8">
+            <h2>What kind of emotional tone do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Thought-provoking')">Thought-provoking</div>
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Inspirational')">Inspirational</div>
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Hopeful')">Hopeful</div>
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Bittersweet')">Bittersweet</div>
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Informative')">Informative</div>
+                <div class="option" onclick="selectOption(this, 'emotional_tone', 'Dramatic')">Dramatic</div>
+            </div>
+        </div>
+
+        <div class="card" id="question9">
+            <h2>What level of romance do you prefer?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'romance', 'Non-existent')">Non-existent</div>
+                <div class="option" onclick="selectOption(this, 'romance', 'Minimal')">Minimal</div>
+                <div class="option" onclick="selectOption(this, 'romance', 'Subplot')">Subplot</div>
+                <div class="option" onclick="selectOption(this, 'romance', 'Complicated')">Complicated</div>
+                <div class="option" onclick="selectOption(this, 'romance', 'Central to the plot')">Central to the plot</div>
+            </div>
+        </div>
+
+        <div class="card" id="question10">
+            <h2>How important is world-building to you?</h2>
+            <div class="options">
+                <div class="option" onclick="selectOption(this, 'world_building_importance', 'Low importance')">Low importance</div>
+                <div class="option" onclick="selectOption(this, 'world_building_importance', 'Moderate importance')">Moderate importance</div>
+                <div class="option" onclick="selectOption(this, 'world_building_importance', 'High importance')">High importance</div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <!-- <button type="button" id="nextButton" onclick="nextQuestion()">Next</button> -->
+        </div>
     </div>
+    <script src="{% static 'js/script-quiz.js' %}?v=2"></script>
 </body>
 </html>
